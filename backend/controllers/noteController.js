@@ -3,7 +3,7 @@ import Note from "../models/Note.js"
 //create note
 export const createNote = async(req,res)=>{
     try{
-        const {title,content} = req.body
+        const {title,content,category} = req.body
         const note = await Note.create({title,content})
         res.status(201).json(note)
     }catch(error){
@@ -32,5 +32,29 @@ export const getNote = async(req,res)=>{
         res.status(200).json(note)
     }catch(error){
         res.status(500).json({message: error.message})
+    }
+}
+
+//update one
+export const updateNote = async (req,res) => {
+    try {
+        const {title,content,category} = req.body
+        const updateNote = await Note.findByIdAndUpdate(req.params.id,{title,content,category})
+        if(!updateNote){return res.status(404).json({message:"id is not valid."})}
+        res.status(200).json(updateNote)
+    } catch (error) {
+        res.status(500).json({message:error.message})
+    }
+}
+
+//delete one
+export const deleteNote = async(req,res)=>{
+    try {
+      
+      const  deleteNote =  await Note.findByIdAndDelete(req.params.id)
+       if(!deleteNote){ return res.status(404).json({message: "id is invalid."})}
+        res.status(200).json({message: "successfully deleted."})
+    } catch (error) {
+        res.status(500).json({message:error.message})
     }
 }
