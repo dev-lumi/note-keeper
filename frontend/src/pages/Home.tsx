@@ -41,13 +41,27 @@ const Home = () => {
     }
   }
 
-  const handleEdit = async(id:string, note: CreateNoteData)=>{
-    try {
-      const updatedNote = await 
-    } catch (error) {
+  // const handleEdit = async(id:string, note: CreateNoteData)=>{
+  //   try {
+  //     const updatedNote = await 
+  //   } catch (error) {
       
-    }
+  //   }
+  // }
+
+  const handleEdit = async (updatedNote: Note) => {
+  try {
+    setNotes((prevNotes) =>
+      prevNotes.map((note) =>
+        note._id === updatedNote._id
+          ? updatedNote
+          : note
+      )
+    );
+  } catch (error) {
+    console.error("Failed to update note:", error);
   }
+};
 
   if(loading){
     return <h1>Loading...</h1>
@@ -57,6 +71,7 @@ const Home = () => {
       <h1 className="text-center font-bold text-2xl my-5">Note Keeper</h1>
       <NoteForm onCreate={handleCreate}/>
       <NoteList notes={notes} onDelete={handleDelete} onEdit={handleEdit}/>
+      {/* <NoteForm onUpdate={handleEdit}/> */}
     </main>
   );
 };

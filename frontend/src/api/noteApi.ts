@@ -24,7 +24,7 @@ export const createNote = async(note:CreateNoteData):Promise<Note> => {
     return response.data;
 }
 
-export const updateNote =async (id :string, note:CreateNoteData):Promise<Note> =>{
+export const updateNote =async (id :string, note:Partial<Note>):Promise<Note> =>{
     const response = await axios.patch<Note>(`${API}/${id}`,note)
     return response.data;
 }
