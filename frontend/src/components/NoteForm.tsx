@@ -37,12 +37,14 @@ const NoteForm = ({ onCreate, editingNote, onCancelEdit }: NoteFormProps) => {
   };
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!formData.title.trim()||!formData.content.trim()) {
+    if (!formData.title.trim()||!formData.content.trim()||!formData.category?.trim()) {
+      alert("Please fill in all fields")
       return;
     }
     onCreate({
       title: formData.title.trim(),
       content: formData.content.trim(),
+      category: formData.category?.trim() 
     });
     if (!editingNote) {
       setFormData({
