@@ -4,7 +4,7 @@ import NoteCard from "./NoteCard";
 interface NoteListProps {
   notes: Note[];
   onDelete: (id: string) => Promise<void>;
-  onEdit: (id: string) => Promise<void>;
+  onEdit: (note : Note) => void;
 }
 
 const NoteList = ({ notes, onDelete, onEdit }: NoteListProps) => {

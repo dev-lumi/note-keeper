@@ -38,8 +38,9 @@ export const getNote = async(req,res)=>{
 //update one
 export const updateNote = async (req,res) => {
     try {
-        const {title,content,category} = req.body
-        const updateNote = await Note.findByIdAndUpdate(req.params.id,{title,content,category})
+        // const {title,content,category} = req.body
+        const {id} = req.params
+        const updateNote = await Note.findByIdAndUpdate(id,req.body,{new:true})
         if(!updateNote){return res.status(404).json({message:"id is not valid."})}
         res.status(200).json(updateNote)
     } catch (error) {
